@@ -1,6 +1,6 @@
 <?php
 /*
-  INTERFACE (PHP)
+  INTERFACE (PHP) 11
 
   What is it?
   - An interface is a template for classes, just like a class is a
