@@ -1,0 +1,33 @@
+<?php
+/*
+  INTERFACE (PHP)
+
+  What is it?
+  - An interface is a template for classes, just like a class is a
+    template for objects.
+  - It only has method names, parameters and return types.
+    The methods have no body (no code inside).
+  - It works like a contract: any class that uses the interface must
+    have all of its methods.
+  - We write it with the `interface` keyword:
+        interface MyInterface {
+            public function myFunction(int $a, int $b);
+        }
+
+  How to use it:
+  - A class uses an interface with the `implements` keyword
+    (not `extends`):
+        class MyClass implements MyInterface { ... }
+  - The class must implement every method of the interface.
+    This means it must write the real code for each method.
+
+  Rules:
+  1. Interface methods have no body, so there are no curly braces { }.
+  2. All interface methods must be public.
+  3. In the class, each method must match the interface exactly:
+     same name, same number of parameters, same types and same
+     return type.
+  4. If the class misses even one method, PHP shows a Fatal error.
+  5. You cannot make an object from an interface directly.
+*/
+//Example 1 
