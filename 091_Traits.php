@@ -84,7 +84,7 @@ class myClass2
 $obj = new myClass2();
 $obj->hello1();
 
-//example 2334
+//example 23345
 
 
 /*
