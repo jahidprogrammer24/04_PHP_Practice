@@ -39,6 +39,52 @@
   8. A trait can have static methods and static properties. Each class that uses the trait gets its own copy of the static property.
   9. Inside a trait, __TRAIT__ returns the name of the trait.
 */
+//creating a trait and using it
+trait myTrait
+{
+    //function body1
+    public function method1()
+    {
+        echo "method1 is called" . "<br>";
+    }
+    //function body2
+    public function method2()
+    {
+        echo "method2 is called" . "<br>";
+    }
+}
+class myClass3
+{
+    // Using the trait 
+    use myTrait;
+    public function additionalMethod()
+    {
+        echo "This is additional method in my class" . "<br>";
+    }
+}
+$myClassInstance = new myClass3();
+$myClassInstance->method1();
+$myClassInstance->method2();
+$myClassInstance->additionalMethod();
+
+//Cannot instantiate trait
+trait myTrait2
+{
+    public function hello()
+    {
+        echo "Hi Jahidul Islam" . __TRAIT__ . "<br>";
+    }
+}
+class myClass2
+{
+    use myTrait2;
+}
+//$obj = new myTrait2();
+//$obj->hello();//Fatal error: Uncaught Error: Cannot instantiate trait myTrait2
+$obj = new myClass2();
+$obj->hello();
+
+//example 
 
 
 /*
