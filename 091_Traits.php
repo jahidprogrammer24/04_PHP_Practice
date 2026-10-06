@@ -84,7 +84,25 @@ class myClass2
 $obj = new myClass2();
 $obj->hello1();
 
-//example 23345
+//avarage
+trait myTrait3{
+	function avg($x, $y){
+		return ($x+$y)/2;
+	}
+}
+class marks{
+	use myTrait3;
+	private $m1, $m2;
+    function __construct($x, $y){
+    	$this->m1 = $x;
+    	$this->m2 = $y;
+    }
+    function percent():float{
+    	return $this->avg($this->m1, $this->m2);
+    }
+}
+$obj2 = new marks(50, 60);
+echo"percentage:".$obj2->percent();
 
 
 /*
