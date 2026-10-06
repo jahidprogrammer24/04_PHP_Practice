@@ -70,7 +70,7 @@ $myClassInstance->additionalMethod();
 //Cannot instantiate trait
 trait myTrait2
 {
-    public function hello()
+    public function hello1()
     {
         echo "Hi Jahidul Islam" . __TRAIT__ . "<br>";
     }
@@ -82,7 +82,7 @@ class myClass2
 //$obj = new myTrait2();
 //$obj->hello();//Fatal error: Uncaught Error: Cannot instantiate trait myTrait2
 $obj = new myClass2();
-$obj->hello();
+$obj->hello1();
 
 //example 
 
