@@ -106,8 +106,8 @@ class marks
         return $this->avg($this->m1, $this->m2);
     }
 }
-$obj2 = new marks(50, 60);
-echo "percentage:" . $obj2->percent();
+//$obj2 = new marks(50, 60);
+//echo "percentage:" . $obj2->percent();
 
 //multiple trait
 trait addition
