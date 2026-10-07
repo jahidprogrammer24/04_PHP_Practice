@@ -79,7 +79,7 @@ siMethod::myStatic();
 $iMethod = new siMethod();
 $iMethod->myInstance();
 
-// self
+//calling static method from own class instance method by self and from drived class instance method by parent key, and by derived class name from the outside.
 class cWithsel
 {
   public static function myStatic1()
@@ -96,7 +96,6 @@ class cWithsel
 $cWithsel = new  cWithsel();
 $cWithsel->myInstance1();
 
-//calling static method from own class instance method by self and from drived class instance method by parent key, and by derived class name from the outside.
 class cWithself
 {
   public static function myStatic2()
