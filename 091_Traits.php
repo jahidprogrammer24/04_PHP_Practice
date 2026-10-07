@@ -85,26 +85,135 @@ $obj = new myClass2();
 $obj->hello1();
 
 //avarage
-trait myTrait3{
-	function avg($x, $y){
-		return ($x+$y)/2;
-	}
-}
-class marks{
-	use myTrait3;
-	private $m1, $m2;
-    function __construct($x, $y){
-    	$this->m1 = $x;
-    	$this->m2 = $y;
+trait myTrait3
+{
+    function avg($x, $y)
+    {
+        return ($x + $y) / 2;
     }
-    function percent():float{
-    	return $this->avg($this->m1, $this->m2);
+}
+class marks
+{
+    use myTrait3;
+    private $m1, $m2;
+    function __construct($x, $y)
+    {
+        $this->m1 = $x;
+        $this->m2 = $y;
+    }
+    function percent(): float
+    {
+        return $this->avg($this->m1, $this->m2);
     }
 }
 $obj2 = new marks(50, 60);
-echo"percentage:".$obj2->percent();
+echo "percentage:" . $obj2->percent();
 
+//multiple trait
+trait addition
+{
+    function add($x, $y)
+    {
+        return $x + $y;
+    }
+}
+trait multiplication
+{
+    function multiply($x, $y)
+    {
+        return $x * $y;
+    }
+}
+class numbers
+{
+    use addition, multiplication;
+    private int $m1, $m2;
+    function __construct($x, $y)
+    {
+        $this->m1 = $x;
+        $this->m2 = $y;
+    }
+    function calculate(): array
+    {
+        $arr = [$this->add($this->m1, $this->m2), $this->multiply($this->m1, $this->m2)];
+        return $arr;
+    }
+}
+$obj4 = new numbers(12, 14);
+$number = $obj4->calculate();
+echo "Addition:" . $number[0] . PHP_EOL;
+echo "Multiplication:" . $number[1] . PHP_EOL;
+//Overriding method of trait
+trait myTrait5
+{
+    public function sayHello()
+    {
+        echo "Hello World";
+    }
+}
+class override
+{
+    use myTrait5;
+    public function sayHello()
+    {
+        echo "Hello PHP";
+    }
+}
+$obj6 = new override();
+$obj6->sayHello();
 
+//insteadof
+
+trait myTrait6
+{
+    public function sayHello()
+    {
+        echo "Hello World";
+    }
+}
+trait myNewTrait
+{
+    public function sayHello()
+    {
+        echo "Hello PHP";
+    }
+}
+class insteadof1
+{
+    use myTrait6, myNewTrait {
+        myNewTrait::sayHello insteadof myTrait6;
+    }
+}
+$obj7 = new insteadof1();
+$obj7->sayHello();
+
+//alice of trait function
+/*
+trait myTrait6
+{
+    public function sayHello()
+    {
+        echo "Hello World";
+    }
+}
+trait myNewTrait
+{
+    public function sayHello()
+    {
+        echo "Hello PHP";
+    }
+}
+class insteadof1
+{
+    use myTrait6, myNewTrait {
+        myNewTrait::sayHello as hello;
+        myTrait6::sayHello insteadof myNewTrait;
+    }
+}
+$obj7 = new insteadof1();
+$obj7->sayHello();
+$obj7->hello();
+/*
 /*
   Trait vs Inheritance vs Interface:
   - Inheritance (extends) shows a relationship, like "Dog is an Animal".
