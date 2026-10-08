@@ -24,7 +24,41 @@ Rules:
 7. The value lives only for one request. A page refresh resets it. Use a database or session to keep data longer.
 8. The starting value must be a simple value, not the result of a function.
 9. Make it private static and add a public static getter method, so outside code cannot change it by mistake.
+*/
+class myClass1
+{
+    static string $var1 = " My Class" . "<br>";
+    function cWithself()
+    {
+        echo "accessing with self inside class:" . self::$var1 . "<br>";
+    }
+}
+class dClass extends myClass1
+{
+    function cWithparent()
+    {
+        echo "accessing with parent from derived class" . parent::$var1 . "<br>";
+    }
+}
+$obj1 = new myClass1;
+$obj1->cWithself();
+echo "accessing with scope resolution operator outside of class:" . myClass1::$var1 . "<br>";
+//echo "accessing static property with -> operator:" . $obj1->var1 . "<br>";//Notice: Accessing static property myClass1::$var1 as non static 
+//Warning: Undefined property: myClass1::$var1
 
+$obj2 = new dClass;
+$obj2->cWithparent();
+
+
+
+
+
+
+
+
+
+
+/*
 Constant vs Static Property
 
 Keyword:
