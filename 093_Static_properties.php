@@ -49,15 +49,6 @@ echo "accessing with scope resolution operator outside of class:" . myClass1::$v
 $obj2 = new dClass;
 $obj2->cWithparent();
 
-
-
-
-
-
-
-
-
-
 /*
 Constant vs Static Property
 
