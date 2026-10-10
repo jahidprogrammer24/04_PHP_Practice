@@ -66,22 +66,117 @@ Rules:
 13. An array property cannot be printed with echo.
     Use print_r() or var_dump() for it.
 */
-//Showing public prperty llit from outside of class
+//Showing public prperty list from outside of class
 class myclass
 {
-    private $var;
-    protected $var1;
-    public $x, $y, $z;
-    public function __construct()
-    {
-        $this->var = "Hello World";
-        $this->var1 = array(1, 2, 3);
-        $this->x = 100;
-        $this->y = 200;
-        $this->z = 300;
-    }
+   private $var;
+   protected $var1;
+   public $x, $y, $z;
+   public function __construct()
+   {
+      $this->var = "Hello World";
+      $this->var1 = array(1, 2, 3);
+      $this->x = 100;
+      $this->y = 200;
+      $this->z = 300;
+   }
 }
 $obj = new myclass();
 foreach ($obj as $key => $value) {
-    print "$key => $value" . "<br>";
+   print "$key => $value" . "<br>";
+}
+
+//showing all property from inside the class
+class myclass1
+{
+   private $var;
+   protected $var1;
+   public $x, $y, $z;
+   public function __construct()
+   {
+      $this->var = "Hello World";
+      $this->var1 = array(1, 2, 3);
+      $this->x = 100;
+      $this->y = 200;
+      $this->z = 300;
+   }
+   public function iterate()
+   {
+      foreach ($this as $k => $v) {
+         if (is_array($v)) {
+            var_dump($v);
+         } else {
+            echo "$k: $v" . "<br>";
+         }
+      }
+   }
+}
+$obj1 = new myclass1();
+$obj1->iterate();
+// 
+class myClass2
+{
+   private $privateVar = "Private Data";
+   protected $protectedVar = "Protected Data";
+   public $x = 100;
+
+   public function iterate1()
+   {
+      foreach ($this as $key => $value) {
+         echo "$key : $value" . "<br>";
+      }
+   }
+}
+$obj2 =  new myClass2;
+$obj2->iterate1();
+//iterator extends 5 traversable methods beild-in
+
+//interface iterator extends Traversable{
+/*Methods*/
+//public current():mixed
+//public key(): mixed
+//public next():void
+//public rewind(): void
+//public valid(): bool
+//}
+class myClass3 implements Iterator
+{
+   private $arr = array('a', 'b', 'c');
+
+   public function rewind(): void
+   {
+      echo "rewinding" . "<br>";
+      reset($this->arr);
+   }
+   public function current()
+   {
+      $var = current($this->arr);
+      echo "current:$var" . "<br>";
+      return $var;
+   }
+   public function key()
+   {
+      $var = key($this->arr);
+      echo "key: $var" . "<br>";
+      return $var;
+   }
+   public function next(): void
+   {
+      $var = next($this->arr);
+      echo "next:$var" . "<br>";
+      #return $var;
+   }
+   public function valid(): bool
+   {
+      $key = key($this->arr);
+      $var = ($key !== NULL && $key !== FALSE);
+      echo "valid: $var" . "<br>";
+      return $var;
+   }
+}
+
+$obj3 = new myClass3();
+
+foreach ($obj3 as $k => $v) {
+   print "$k: $v" . "<br>";
 }
