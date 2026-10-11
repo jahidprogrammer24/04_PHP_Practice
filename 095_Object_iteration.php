@@ -1,6 +1,6 @@
 <?php
 /*
-PHP OBJECT ITERATION
+PHP OBJECT ITERATION:
 
 What is it?
 
@@ -66,6 +66,7 @@ Rules:
 13. An array property cannot be printed with echo.
     Use print_r() or var_dump() for it.
 */
+
 //Showing public prperty list from outside of class
 class myclass
 {
@@ -128,10 +129,12 @@ class myClass2
    }
 }
 $obj2 =  new myClass2;
-$obj2->iterate1();
-//iterator extends 5 traversable methods beild-in
 
-//interface iterator extends Traversable{
+// Iterator extends Traversable (Traversable has no methods, it is just a marker)
+// Iterator itself adds 5 methods: current, key, next, rewind, valid
+// Any class that implements Iterator must write all 5 methodsj2->iterate1();
+
+//iterator extends Traversable{
 /*Methods*/
 //public current():mixed
 //public key(): mixed
@@ -179,4 +182,70 @@ $obj3 = new myClass3();
 
 foreach ($obj3 as $k => $v) {
    print "$k: $v" . "<br>";
+}
+//all code
+class Book implements Iterator
+{
+   private $properties = [];
+   private $position = 0;
+
+   public function __construct($title, $author, $year)
+   {
+      $this->properties['title: '] = $title;
+      $this->properties['author: '] = $author;
+      $this->properties['year: '] = $year;
+   }
+
+   public function rewind(): void
+   {
+      $this->position = 0;
+   }
+
+   public function current()
+   {
+      return array_values($this->properties)[$this->position];
+   }
+
+   public function key()
+   {
+      return array_keys($this->properties)[$this->position];
+   }
+
+   public function next(): void
+   {
+      ++$this->position;
+   }
+
+   public function valid(): bool
+   {
+      return $this->position < count($this->properties);
+   }
+}
+$book = $obj = new Book("Hidayatul quran ", "M. Hedayalullh ", "2024-26");
+
+foreach ($book as $key => $value) {
+   echo "$key: $value";
+}
+//IteratorAggergate
+class Book1 implements IteratorAggregate
+{
+   private $properties = [];
+
+   public function __construct($title, $author, $year)
+   {
+      $this->properties = [
+         'title' => $title,
+         'author' => $author,
+         'year' => $year,
+      ];
+   }
+   public function getIterator(): Iterator
+   {
+      return new ArrayIterator($this->properties);
+   }
+}
+$book1 = new Book1("PHP Basics", "Jahidul Islam", 2020);
+
+foreach ($book1 as $key => $value) {
+   echo "$key: $value" . "<br>";
 }
