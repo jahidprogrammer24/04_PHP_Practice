@@ -1,5 +1,5 @@
 <?php
-/
+/*
   PHP OVERLOADING (Magic Methods)
 
   What is it?
@@ -52,12 +52,3 @@
   Laravel Eloquent: $user->name works through __get().
   User::where() works through __callStatic() (method forwarding).
  */
-
-
-
-
-
-
-
-
-?>
