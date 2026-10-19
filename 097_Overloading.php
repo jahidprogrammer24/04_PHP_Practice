@@ -3,11 +3,9 @@
   PHP OVERLOADING (Magic Methods)
 
   What is it?
-  In PHP, overloading does NOT mean same method name with different arguments.
-  It means creating properties and methods dynamically at runtime.
+  In PHP, overloading means creating properties and methods dynamically at runtime.
   PHP calls a magic method when you use something that does not exist
   or is not accessible (private / protected).
-  Think of it as a receptionist: the room is missing or locked,
   so the magic method handles the request instead of a fatal error.
 
   Property overloading methods:
@@ -52,3 +50,66 @@
   Laravel Eloquent: $user->name works through __get().
   User::where() works through __callStatic() (method forwarding).
  */
+//Property overloading
+class UserProfile
+{
+   private array $data = [];
+   private array $allowed = ['name', 'email', 'phone'];
+
+   public function __set($name, $value)
+   {
+      if (!in_array($name, $this->allowed)) {
+         echo "Not allowed: $name" . "<br>";
+         return;
+      }
+      if ($name === 'email' && !filter_var($value, FILTER_VALIDATE_EMAIL)) {
+         echo "Invalid email: $value" . "<br>";
+         return;
+      }
+      echo "Setting '$name' property with value" . "<br>";
+      $this->data[$name] = $value;
+   }
+   public function __get($name)
+   {
+      echo "Getting '$name' property with value";
+      return $this->data[$name] ?? null;
+   }
+   public function __isset($name)
+   {
+      echo "Checking $name property" . "<br>";
+      return isset($this->data[$name]);
+   }
+   public function __unset($name)
+   {
+      echo "Removing $name property" . PHP_EOL;
+      unset($this->data[$name]);
+   }
+}
+$user = new UserProfile();
+
+//__set
+$user->name = " 'Jahidul Islam'"; //Setting 'name' property with value
+$user->email = 'jahidulislam@gmail.com';
+$user->email = "abc";
+$user->phone = "01312146423";
+$user->age = 28; //Not allowed: age
+
+//__get
+echo $user->name . "<br>"; //Getting 'name' property with value 'Jahidul Islam'
+echo $user->email . "<br>";
+echo $user->phone . "<br>";
+
+//__isset
+var_dump(isset($user->name)); //Checking name property bool(true)
+var_dump(isset($user->age)); //Checking age property bool(false) 
+
+//__empty()
+var_dump(empty($user->phone)); //Checking phone property Getting 'phone' property with valuebool(false) 
+var_dump(empty($user->name));
+
+//__unset
+unset($user->name); //Removing name property
+var_dump(isset($user->name)); //Checking name property bool(false) 
+
+//
+var_dump($user->data);//Getting 'data' property with valueNULL
