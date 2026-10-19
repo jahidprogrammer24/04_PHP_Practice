@@ -112,4 +112,49 @@ unset($user->name); //Removing name property
 var_dump(isset($user->name)); //Checking name property bool(false) 
 
 //
-var_dump($user->data);//Getting 'data' property with valueNULL
+var_dump($user->data); //Getting 'data' property with valueNULL
+
+
+//Method overloading
+/*
+class student
+{
+   private $firstName;
+   private $lastName;
+
+   private function setName($fname, $lname)
+   {
+      $this->firstName = $fname;
+      $this->lastName = $lname;
+   }
+   public function __call($name1, $args)
+   {
+      echo "This is private or non existing method: $name1";
+      print_r($args);
+   }
+}
+$obj = new student();
+$obj->setName('Jahidul', 'Islam'); //This is private or non existing method: setNameArray ( [0] => Jahidul [1] => Islam ) 
+$obj->setName2('Mahmudul', 'Hasan');//This is private or non existing method: setName2Array ( [0] => Mahmudul [1] => Hasan )
+*/
+class student
+{
+   private static function setName()
+   {
+      echo "This is a static method";
+   }
+   //public static function __callStatic($name2, $args2)
+   //{
+   //   echo "This is a private method:" . $name2;
+   //   print_r($args2);
+   //}
+   public static function __callSatic($name2, $args2)
+   {
+      if (method_exists(__class__, $name2)) {
+         call_user_func_array([__class__, $name2], $args2);
+      } else {
+         echo "this method does not exist:" . $name2;
+      }
+   }
+}
+student::setName('Sayful', 'Islam');
