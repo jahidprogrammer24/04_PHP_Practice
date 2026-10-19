@@ -148,7 +148,7 @@ class student
    //   echo "This is a private method:" . $name2;
    //   print_r($args2);
    //}
-   public static function __callSatic($name2, $args2)
+   public static function __callStatic($name2, $args2)
    {
       if (method_exists(__class__, $name2)) {
          call_user_func_array([__class__, $name2], $args2);
@@ -157,4 +157,4 @@ class student
       }
    }
 }
-student::setName('Sayful', 'Islam');
+student::setName('Sayful', 'Islam');//This is a static method
