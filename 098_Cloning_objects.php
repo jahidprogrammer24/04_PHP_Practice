@@ -64,3 +64,15 @@ Deep copy: the object has inner objects and the copy must be fully independent.
 Clone first and change after, when the original must stay as it is.
 ```
 */
+//shallow copy
+class student01{
+	public $name;
+}
+$student1 = new student01();
+$student2 = clone $student1;
+
+$student1->name= "Jahidul Islam";
+$student2->name= "Mahmudul Hasan";
+
+echo $student1->name;
+echo $student2->name; 
