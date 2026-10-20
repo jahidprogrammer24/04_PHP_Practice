@@ -64,7 +64,7 @@ Deep copy: the object has inner objects and the copy must be fully independent.
 Clone first and change after, when the original must stay as it is.
 ```
 */
-//shallow copy
+//shallow copy (clone)
 class student01{
 	public $name;
 }
@@ -74,5 +74,38 @@ $student2 = clone $student1;
 $student1->name= "Jahidul Islam";
 $student2->name= "Mahmudul Hasan";
 
-echo $student1->name;
-echo $student2->name; 
+echo $student1->name;//Jahidul Islam
+echo $student2->name;//Mahmudul Hasan
+
+//shallow copy [clone] (for inner object like refarance copy)
+class address{
+	public $city = "Dhaka"; 
+	public $area ="mirpur"; 
+	public function setAddress($city, $area){
+		$this->city = $city;
+		$this->area = $area;
+	}
+}
+class student02{
+	public $name;
+	public $address;
+	public function setName($name){
+		$this->name = $name;
+	}
+	public function __clone(){
+		$this->address = clone $this->address;
+	}
+}
+$s3= new student02();
+$s3->address = new address();
+$s4 = clone $s3;
+
+echo $s3->name = "Sayful";//sayful
+echo $s3->address->city;
+
+echo $s4->name = "adiba";//adiba
+echo $s4->address->city = "vhanga";//vhanga
+
+echo $s3->address->city;// vhanga
+
+//
