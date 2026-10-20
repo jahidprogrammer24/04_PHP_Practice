@@ -77,7 +77,7 @@ $student2->name= "Mahmudul Hasan";
 echo $student1->name;//Jahidul Islam
 echo $student2->name;//Mahmudul Hasan
 
-//shallow copy [clone] (for inner object like refarance copy)
+//shallow copy [clone] (for inner object like refarance copy), use __clone for deep copy
 class address{
 	public $city = "Dhaka"; 
 	public $area ="mirpur"; 
