@@ -62,3 +62,69 @@ Do not use it when the class is needed in many places, is big,
 will grow later, or must be saved with serialize.
 Write a normal named class in its own file instead.
 */
+//anonymous class
+$obj = new class("10") {
+   private int $x;
+   public function __construct($x)
+   {
+      echo $this->x = $x;
+   }
+   public function addition($x)
+   {
+      return $this->x + $x;
+   }
+   public function division($x)
+   {
+      return $this->x / $x;
+   }
+};
+
+echo "Addition:" . $obj->addition(10);
+echo "Division:" . $obj->division(5);
+
+//The anonymous class extends the parent
+class myClass
+{
+   public function hello()
+   {
+      echo "Hello World";
+   }
+}
+$obj2 = new class("Jahidul Islam") extends myClass {
+   private string $name;
+   public function __construct($name)
+   {
+      $this->name = $name;
+   }
+   public function greeting()
+   {
+      parent::hello();
+      echo "Welcome" . $this->name . "<br>";
+   }
+};
+$obj2->greeting();
+
+//extentds and implements
+interface SomeInterface
+{
+   public function run();
+}
+
+class myClass1
+{
+   public function hello()
+   {
+      echo "Hello from parent" . "<br>";
+   }
+}
+
+$obj3 = new class extends myClass1 implements SomeInterface {
+   public function run()
+   {
+      echo "Running..." . "<br>";
+   }
+};
+$obj3->run();
+$obj3->hello();
+
+//
