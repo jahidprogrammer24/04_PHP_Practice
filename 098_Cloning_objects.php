@@ -62,5 +62,19 @@ When to use it:
 Shallow copy: the object has no inner objects, or you want them shared on purpose.
 Deep copy: the object has inner objects and the copy must be fully independent.
 Clone first and change after, when the original must stay as it is.
-```
 */
+//Referance copy
+class Student
+{
+    public $name = "Karim";
+}
+$s1 = new Student();
+$s2 = $s1;
+
+echo $s1->name . " " . $s2->name . "<br>"; //Karim Karim
+
+$s1->name = 'Rahim';
+echo $s1->name . " " . $s2->name . "<br>"; //Rahim Rahim
+
+$s2->name = 'Jolil';
+echo $s1->name . " " . $s2->name . "<br>";//Jolil Jolil
