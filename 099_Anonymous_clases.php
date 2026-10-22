@@ -104,7 +104,7 @@ $obj2 = new class("Jahidul Islam") extends myClass {
 };
 $obj2->greeting();
 
-//extentds and implements
+//using extentds and implements
 interface SomeInterface
 {
    public function run();
@@ -127,7 +127,7 @@ $obj3 = new class extends myClass1 implements SomeInterface {
 $obj3->run();
 $obj3->hello();
 
-//get_class() with str_replace()
+//get_class() with str_replace() for finding the name
 $obj4 = new class{
 	public function greeting(){
 		echo "Hello Jahidul Islam";
@@ -137,4 +137,67 @@ $obj4 = new class{
 
 echo "<br>".str_replace("\0","" ,get_class($obj4));
 
-//
+//isAnonymous() method from reflection class for chacking 
+$obj5 = new class{};
+$r = new ReflectionClass($obj5);
+
+var_dump($r->isAnonymous());
+var_dump($r->getName());
+var_dump($r->getMethods());
+
+//dependency injection
+// The logger object is sent into the anonymous class through the constructor  This idea is called Dependency Injection
+
+class Logger{
+	public function log($message){
+		echo "Log:".$message;
+	}
+}
+
+$logger = new Logger();
+
+$obj6 = new class($logger){
+	private $logger;
+	public function __construct($logger){
+		$this->logger = $logger;
+	}
+	public function doSomethings(){
+		$this->logger->log("Doing something important");
+	}
+};
+$obj6->doSomethings();
+
+// interface in finction
+interface Logger1{
+	public function log(string $message):void;
+}
+
+function process(Logger1 $logger){
+	$logger->log("process sterted");
+}
+process(new class implements Logger1{
+	public function log(string $message):void {
+		echo "screen:".$message;
+	}
+});
+
+// same class from one code
+function makeobj(){
+	return new class{};
+};
+
+$a = makeobj();
+$b = makeobj();
+
+var_dump(get_class($a)===get_class($b));
+
+var_dump($a===$b);
+
+//readonly
+$obj7 = new readonly class("karim"){
+	function __construct(public $name){}
+};
+
+echo $obj7->name;
+
+echo $obj7->name = "jahid";//readonly property cannot be changed
