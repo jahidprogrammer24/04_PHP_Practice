@@ -127,4 +127,14 @@ $obj3 = new class extends myClass1 implements SomeInterface {
 $obj3->run();
 $obj3->hello();
 
+//get_class() with str_replace()
+$obj4 = new class{
+	public function greeting(){
+		echo "Hello Jahidul Islam";
+	}
+};
+//echo "name of class". get_class($obj4);
+
+echo "<br>".str_replace("\0","" ,get_class($obj4));
+
 //
