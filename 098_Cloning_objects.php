@@ -128,3 +128,5 @@ echo $s4->name = "adiba"; //adiba
 echo $s4->address->city = "vhanga"; //vhanga
 
 echo $s3->address->city;//Dhaka
+
+//
