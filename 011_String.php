@@ -65,3 +65,4 @@ strpos($str, $find, $start);
 // $start= Form which position you start finding .(optional) 
 echo strpos("Hello World!", "World");
 //here the 'world' word in sixeth positon of 'Hello world!'
+
